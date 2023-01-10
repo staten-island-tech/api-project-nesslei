@@ -1,12 +1,12 @@
 import "./style.css";
 
-const URL = "https://api.quotable.io/randoms";
+const URL = "https://www.freetogame.com/api/games";
 
 async function getData(URL) {
   try {
     const resopnse = await fetch(URL);
     if (response.status < 200 || response.status > 299) {
-      console.timeLog(reospnse.status);
+      console.timeLog(response.status);
       throw error(response);
     } else {
       const data = await response.json();
