@@ -1,22 +1,29 @@
 import "./style.css";
 
-const URL = "https://www.freetogame.com/api/games";
+const games = "https://www.freetogame.com/api/games";
 
-async function getData(URL) {
+async function getData(games) {
   try {
-    const resopnse = await fetch(URL);
+    const response = await fetch(games);
     if (response.status < 200 || response.status > 299) {
-      console.timeLog(response.status);
+      console.Log(response.status);
       throw error(response);
     } else {
       const data = await response.json();
 
-      console.log(data.data[0].entry);
+      data.results.forEach((games) => {
+        document.getElementById("display").insertAdjacentHTML(
+          "afterbegin",
+          `<div class = "card"
+          <h1> "${games.title}"</h1>
+          <img src=${games.thumbnail} alt = "">       
+          </div>`
+        );
+      });
     }
   } catch (error) {
-    console.log(error);
-    console.log("whatever");
-    document.getElementById("API-RESPONSE").textContent = "mommy";
+    console.log("error");
+    document.getElementById("display").textContent = "u suck";
   }
 }
 getData(URL);
