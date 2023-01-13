@@ -1,31 +1,17 @@
 import "./style.css";
 
-const pets =
-  "http://shibe.online/api/shibes?count=[1-100]&urls=[true/false]&httpsUrls=[true/false]";
+const options = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "868afab899msh18229938fd806e0p1740e9jsn539d4b22a966",
+    "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+  },
+};
 
-async function getData(pets) {
-  try {
-    const response = await fetch(pets);
-    if (response.status < 200 || response.status > 299) {
-      console.Log(response.status);
-      throw error(response);
-    } else {
-      const data = await response.json();
-
-      data.forEach((pets) => {
-        document.getElementById("display").insertAdjacentHTML(
-          "afterbegin",
-          `<div class = "card"
-          <h1> ${pets.title}</h1>
-          <img src="${pets.thumbnail}" alt = "">       
-          </div>`
-        );
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    console.log("u suck");
-    document.getElementById("display").textContent = "u suck";
-  }
-}
-getData(pets);
+fetch(
+  "https://cors-anywhere.herokuapp.com/https://deezerdevs-deezer.p.rapidapi.com/playlist/%7Bid%7D",
+  options
+)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
