@@ -1,6 +1,7 @@
 import "./style.css";
 
-const url = 'https://deezerdevs-deezer.p.rapidapi.com/album/14652356';
+const url = 'https://deezerdevs-deezer.p.rapidapi.com/album/';
+const Surl = 'https://deezerdevs-deezer.p.rapidapi.com/search?q=';
 
 const options = {
  method: 'GET',
@@ -9,25 +10,40 @@ const options = {
    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
  }
 }; 
-
-fetch(url, options)
-.then(res => res.json())
-.then(json => { 
-
+async function getAlbumId(search){
+  let res = await fetch(Surl+search, options)
+  let json = await res.json()
   console.log(json)
-  json.tracks.data.forEach((track) => {
-    document.getElementById("display").insertAdjacentHTML(
-      "afterbegin", 
-      `
-      <div class = "card" >
-      <img src="${json.cover}" alt = "Starboy. Abel Makkonen Tesfaye holding his head. The background is red. He looks into your soul creeply">
-      <h2 class = "p" alt ="Starboy"> ${json.title} </h2> 
-      <h3 alt = "${track.title}"> ${track.title} </h3> 
-      <audio class = "audio" controls  src=${track.preview}>
-      </div>
-      `
-    )
+  return json.data[0].album.id
+}
+async function showAlbum(id){
+  let res = await fetch(url+id, options)
+  let json = await res.json()
+  document.getElementById("display").innerHTML = ""
+  console.log(json)
+    json.tracks.data.forEach((track) => {
+      document.getElementById("display").insertAdjacentHTML(
+        "afterbegin", 
+        `
+        <div class = "card" >
+        <img src="${json.cover}" alt = "This is ${json.title} ${track.title} album cover ">
+        <h2 class = "p" alt ="Starboy"> ${json.title} </h2> 
+        <h3 alt = "${track.title}"> ${track.title} </h3> 
+        <audio class = "audio" controls  src=${track.preview}>
+        </div>
+        `
+      )
   })
-})
+  return true
+}
 
-.catch(err => console.error('error:' + err));
+async function main(search){
+  let id = await getAlbumId(search)
+  await showAlbum(id)
+}
+main("Starboy")
+
+document.getElementById("searchButton").addEventListener("click",async function(){
+  let search = document.getElementById("searchBar").value
+  await main(search)
+})
