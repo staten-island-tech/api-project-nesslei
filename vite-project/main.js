@@ -22,7 +22,7 @@ fetch(url, options)
       <img src="${json.cover}" alt = "">
       <h2> ${json.title} </h2> 
       <h3> ${track.title} </h3> 
-      <audio controls  src=${track.preview}>
+      <audio class = "audio" controls  src=${track.preview}>
       </div>
       `
     )
