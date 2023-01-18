@@ -18,10 +18,11 @@ fetch(url, options)
   json.tracks.data.forEach((track) => {
     document.getElementById("display").insertAdjacentHTML(
       "afterbegin", 
-      `<div class = "card" >
-      <img src="${json.cover}" alt = "">
-      <h2> ${json.title} </h2> 
-      <h3> ${track.title} </h3> 
+      `
+      <div class = "card" >
+      <img src="${json.cover}" alt = "Starboy. Abel Makkonen Tesfaye holding his head. The background is red. He looks into your soul creeply">
+      <h2 class = "p" alt ="Starboy"> ${json.title} </h2> 
+      <h3 alt = "${track.title}"> ${track.title} </h3> 
       <audio class = "audio" controls  src=${track.preview}>
       </div>
       `
@@ -30,4 +31,3 @@ fetch(url, options)
 })
 
 .catch(err => console.error('error:' + err));
-
