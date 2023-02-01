@@ -68,7 +68,7 @@ async function main(search) {
   let id = await getAlbumId(search);
   await showAlbum(id);
 }
-main("");
+main("The Weeknd");
 
 document
   .getElementById("searchButton")
