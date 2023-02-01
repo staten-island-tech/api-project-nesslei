@@ -3,6 +3,9 @@ import "./style.css";
 const url = "https://deezerdevs-deezer.p.rapidapi.com/album/";
 const Surl = "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 
+const left = document.querySelector(".left");
+const right = document.querySelector(".right");
+
 /* fix this 
 function currentTime() {
   let date = new Date(); 
@@ -29,7 +32,6 @@ function currentTime() {
 currentTime();
 */
 
-
 const options = {
   method: "GET",
   headers: {
@@ -52,12 +54,18 @@ async function showAlbum(id) {
     document.getElementById("display").insertAdjacentHTML(
       "afterbegin",
       `
-        <div class = "card" >
+      <div class="carousel">
+        <div class = "card">
         <img src="${json.cover}" alt = "This is ${json.title} ${track.title} album cover ">
         <h2 alt = "${track.title}"> ${track.title} </h2> 
         <h3 class = "p" alt ="Song ${json.title}"> ${json.title}</h3> 
         <audio class = "audio" controls  src=${track.preview}>
         </div>
+      <div class="controls">
+          <span class="arrow left"> </span>
+          <span class="arrow right"> </span>
+        </div>
+      </div>
         `
     );
   });
