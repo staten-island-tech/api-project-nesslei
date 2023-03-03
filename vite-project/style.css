@@ -10,6 +10,17 @@
   background-color: white; 
 }
 
+body {
+  margin: 0; 
+  padding: 0; 
+}
+
+ul {
+  margin: 0; 
+  padding: 0; 
+}
+
+
 .button {
   height: auto; 
   width: 5rem; 
